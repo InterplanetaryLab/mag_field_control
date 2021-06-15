@@ -1,4 +1,5 @@
 #include <MCP42010.h>
+#include "math_functions.h"
 MCP42010 digipot(10,13,11);
 
 #define EN_COIL 2
@@ -38,16 +39,27 @@ void loop() {
     //dir = (Serial.read() != 0) ? 0 : 1;
     //inten = (int) Serial.read() % 150; 
   }
-  sin_demo();
+  sine_demo();
   set_coil_output(inten,dir);
 
-  delay(100);
+  delay(200);
   Serial.print("curr dir: "); Serial.print((!dir) ? "Forward" : "Reversed");
   Serial.print("  curr inten: "); Serial.println(inten); 
 }
 
+void sine_demo()
+{
+	double time_multiplier = (double) millis()/100000; // x in the sin function is time *2pi
 
-void sin_demo()
+	double inten_temp = range_limit(151*sin((float) (time_multiplier* PI)),-151,151);
+
+	inten = abs((int)inten_temp);
+
+	dir = (inten_temp >= 0) ? 1 : 0;
+} 
+
+
+void triag_demo()
 {
 	switch (alt_dir)
 	{
