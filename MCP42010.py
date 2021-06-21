@@ -5,7 +5,7 @@ class MCP42010:
     spi = 0
     _cs = 0
 
-    def __int__(self):
+    def __init__(self):
         self._cs = 0
 
     def setup_pot(self,CS):
@@ -22,6 +22,7 @@ class MCP42010:
     def close(self):
         self.spi.close()
 
+
 '''
 test = MCP42010()
 try:
@@ -33,4 +34,5 @@ try:
 except KeyboardInterrupt:
     test.close()
     sys.exit()
+
 '''
