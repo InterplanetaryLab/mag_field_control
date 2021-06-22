@@ -20,14 +20,17 @@ try:
             for mag_mag in range (0,150):
                 test.set_coil_output_open(mag_dir,mag_mag)
                 last_time = time.time()
+                mag_data = []
                 while get_time_delta_sec(last_time) < time_delta_sec: # note there is some bug that causes this to miss its time delay or something of the sort
                     test.print_coil_state() 
                     print "time sec: ", int(time.time()%60)
                     time.sleep(.15) 
-                    test.print_mag_output()
-                mag_data = test.print_mag_output()
+                    mag_data = test.print_mag_output()
                 mag_data.append(test.print_coil_state())
                 data_writer.writerow(mag_data)
+    
+    test.stop_coil()
+    sys.exit()
 
 except KeyboardInterrupt:
     test.stop_coil()
