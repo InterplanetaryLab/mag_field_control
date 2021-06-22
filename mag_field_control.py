@@ -34,15 +34,20 @@ class MAG_CONTROL:
 
     def print_mag_output(self):
         mag = self.mpu.readMagnet()
-        print " mx = " , ( mag['x'] )
-        print " my = " , ( mag['y'] )
-        print " mz = " , ( mag['z'] )
+        x = mag['x']
+        y = mag['y']
+        z = mag['z']
+        print " mx = " , ( x )
+        print " my = " , ( y )
+        print " mz = " , ( z )
         print
+        return [x,y,z]
 
     def print_coil_state(self):
         print "en_status = ", (self.curr_en)
         print "dir_status = ", (self.curr_dir)
         print "mag_status = ", (self.curr_mag)
+        return [self.curr_en,self.curr_dir,self.curr_mag]
 
     def set_coil_output_open(self, coil_dir, volt):
         self.curr_mag = volt
