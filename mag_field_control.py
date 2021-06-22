@@ -28,7 +28,7 @@ class MAG_CONTROL:
        GPIO.setup(rev_coil_pin, GPIO.OUT)
        GPIO.setup(for_coil_pin, GPIO.OUT)
 
-       self.set_coil_output_open(1,127)
+       self.set_coil_output_open(1,0)
 
        self.mpu = FaBo9Axis_MPU9250.MPU9250()
 
